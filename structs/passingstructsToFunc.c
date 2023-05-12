@@ -16,7 +16,7 @@ int main()
     //read string input from the user untill \n is entered
     //\n is discarded
 
-    scanf("%[^\n]%c", s1.name);
+    scanf("%s", s1.name);
 
     printf("Enter age: ");
     scanf("%d", &s1.age);
@@ -30,5 +30,5 @@ void display(student s)
     printf("\nDisplaying information...\n");
     printf("...\n...\n");
     printf("\nName: %s\n", s.name);
-    printf("Age: %d", s.age);
+    printf("Age: %d\n", s.age);
 }
