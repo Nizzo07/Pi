@@ -176,3 +176,189 @@ int removeAll(LInt *l, int x)
     }
     return count;
 }
+
+//11
+int removeDups(LInt *l)
+{
+    int count = 0;
+
+    for(; *l; l = (&(*l)->prox))
+    {
+        LInt anterior = (*l);
+        LInt seguinte = (*l)->prox;
+
+        for (; seguinte; seguinte = anterior->prox)
+        {
+            if (seguinte->valor == (*l)->valor)
+            {
+                count += 1;
+                anterior->prox = seguinte->prox;
+                free(seguinte);
+            } else {
+                anterior = seguinte;
+            }
+            
+        }
+    }
+    return count;
+}
+
+//12
+int removeMaior(LInt *l)
+{
+    LInt maior;
+    LInt ant;
+    LInt aux = *l;
+
+    int maiorValor = 0;
+
+    for (; aux; aux = aux->prox)
+    {
+        if(aux->valor > maiorValor)
+        {
+            maiorValor = aux->valor;
+            maior = aux;            
+        }
+    }
+
+    aux = *l;
+    while (aux->valor != maiorValor)
+    {
+        ant = aux;
+        aux = aux->prox;
+    }
+
+    ant->prox = maior->prox;
+    free(maior);
+    maior = NULL;
+
+    return maiorValor;    
+}
+
+//13
+void init(LInt *l)
+{
+    while ((*l)->prox)
+    {
+        l = &(*l)->prox;
+
+        free(*l);
+        *l = NULL;
+    }
+    
+}
+
+//14
+void appendL(LInt *l, int x)
+{
+    while (*l)
+    {
+        l = &(*l)->prox;
+    }
+    *l = malloc(sizeof(struct lligada));
+    (*l)->valor = x;
+    (*l)->prox = NULL;
+}
+
+//15
+void concatL(LInt *a, LInt b)
+{
+    while (*a)
+    {
+        a = &((*a)->prox);
+        (*a) = b;
+    }
+    
+}
+
+//16
+LInt cloneL(LInt l)
+{
+    LInt new_list;
+    LInt *sitio;
+
+    sitio = &new_list;
+
+    while(l)
+    {
+        *sitio = malloc(sizeof(struct lligada));
+        (*sitio)->valor = l->valor;
+        l = l->prox;
+        sitio = &((*sitio)->prox);
+    }
+    *sitio = NULL;
+    return new_list;
+}
+
+//17
+LInt cloneRev(Lint l)
+{
+    LInt new = NULL;
+    LInt list = NULL;
+
+    for (; l; l = l->prox)
+    {
+        new = malloc(sizeof(struct lligada));
+        new->valor = l->valor;
+        new->prox = list;
+        list = new;
+    }
+    return list;
+}
+
+//18
+int maximo(LInt l)
+{
+    int maior = l->valor;
+
+    while (l)
+    {
+        if(l->valor > maior)
+        {
+            maior = l->valor;
+            l = l->prox;
+        }
+    }
+    return maior;
+}
+
+//19
+int take(int n, LInt *l)
+{
+    int i = 0;
+    while(i < n && *l)
+    {
+        l = &(*l)->prox;
+        i++;
+    }
+    if(!(*l))
+    {
+        return i;
+
+        while(*l)
+        {
+            LInt temp = (*l)->prox;
+            free(*l);
+            *l = temp;
+        }
+    }
+    return n;
+}
+
+//20
+int drop(int n, LInt *l)
+{
+    if(!(*l))
+    {
+        return 0;
+    }
+    int i = 0;
+    while(i < n && *l)
+    {
+        LInt temp = (*l);
+        *l = (*l)->prox;
+        free(temp);
+        i++;
+    }
+    return i;
+}
