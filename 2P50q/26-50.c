@@ -21,9 +21,9 @@ int lenght(LInt l)
 }
 
 //2
-void freeL(LInt)
+void free_List(LInt)
 {
-    LInt list;
+    LInt list, l;
 
     while (l != NULL)
     {
@@ -362,3 +362,5 @@ int drop(int n, LInt *l)
     }
     return i;
 }
+
+//21
